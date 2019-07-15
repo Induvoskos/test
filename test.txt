@@ -1,0 +1,19 @@
+<script>
+  var callbackFunction = function(data) {
+    var wind = data.query.results.channel.wind;    
+    //alert(wind.chill);
+    $("#myWindspeed").text(wind.speed) ;
+
+   var astronomy= data.query.results.channel.astronomy;
+    $("#mySunrise").text(astronomy.sunrise) ;
+    $("#mySunset").text(astronomy.sunset) ;
+
+   var condition = data.query.results.channel.item.condition; 
+   $("#myTemperature").text(condition.temp) ;
+  };
+</script>
+<script src="https://query.yahooapis.com/v1/public/yql?q=select item, condition, wind, astronomy from weather.forecast where woeid = 818717 and u='c'&format=json&callback=callbackFunction"></script>
+Temperature: <span id="myTemperature" /> &deg;C</br>
+Sunrise: <span id="mySunrise" /> </br>
+Sunset:  <span id="mySunset" /> </br>
+Wind Speed:  <span id="myWindspeed" /> km/h
